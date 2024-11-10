@@ -47,6 +47,36 @@ The purpose of this project is to use PySpark to perform data processing on a la
 ```
 This query uses a CTE (common table expression) to get the average probability of becoming a superstar player using the 'WITH' clause. I then compare each player's probability of becoming a superstar to the average. I then only display players who have a probability higher than the average of their position. I order the players by their superstar probability in descending order and display how far above the average they are. 
 
+### Query Result:
+```
+Result of query:
++------------------+-------------------+
+|            Player|      Above_Average|
++------------------+-------------------+
+|       Eric Gordon| 0.1705664174848624|
+|      Tyreke Evans| 0.1628097594848624|
+|   Mike Conley Jr.| 0.1559120984848624|
+|  Derrick Williams| 0.1545898104848624|
+|      Marcus Smart|0.15209536348486238|
+|        Chris Paul|0.15190616448486238|
+|    Victor Oladipo| 0.1488478304848624|
+|  D`Angelo Russell|0.14062087048486238|
+|         Omar Cook|0.13869864848486238|
+|       Joel Embiid| 0.1364542044848624|
+|   Michael Beasley| 0.1350650324848624|
+|      Kyrie Irving| 0.1337208704848624|
+| Russell Westbrook| 0.1314329954848624|
+|     Blake Griffin|0.12675673448486238|
+|Karl-Anthony Towns| 0.1233542044848624|
+|      Bradley Beal| 0.1220542044848624|
+|      James Harden| 0.1213571934848624|
+|         Greg Oden|0.11473309048486238|
+|        Kevin Love|0.11335985048486238|
+|      Tyrus Thomas| 0.1133001814848624|
++------------------+-------------------+
+only showing top 20 rows
+```
+
 ## Transformation Explanation:
 I add a column (Projected Starter) to the dataframe that indicates whether a player is projected to be a starter in the NBA based on their Projected SPM. If the Projected SPM is >= 0.5, then they are considered a Projected Starter, or else they are not. 
 
