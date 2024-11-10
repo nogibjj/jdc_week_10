@@ -51,6 +51,7 @@ This query uses a CTE (common table expression) to get the average probability o
 I add a column (Projected Starter) to the dataframe that indicates whether a player is projected to be a starter in the NBA based on their Projected SPM. If the Projected SPM is >= 0.5, then they are considered a Projected Starter, or else they are not. 
 
 ### Data before transformation:
+```
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+
 |              Player|Position|                  ID|Draft Year|Projected SPM|  Superstar|    Starter|Role Player|       Bust|
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+
@@ -76,8 +77,11 @@ I add a column (Projected Starter) to the dataframe that indicates whether a pla
 |      Brandon Ashley|      PF|      brandon-ashley|      2015| -0.170210127|0.011186812|0.253264673|0.356138802|0.379409713|
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+
 only showing top 20 rows
+```
 
 ### Data after tranformation:
+
+```
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+-----------------+
 |              Player|Position|                  ID|Draft Year|Projected SPM|  Superstar|    Starter|Role Player|       Bust|Projected Starter|
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+-----------------+
@@ -103,3 +107,5 @@ only showing top 20 rows
 |      Brandon Ashley|      PF|      brandon-ashley|      2015| -0.170210127|0.011186812|0.253264673|0.356138802|0.379409713|               No|
 +--------------------+--------+--------------------+----------+-------------+-----------+-----------+-----------+-----------+-----------------+
 only showing top 20 rows
+
+```
