@@ -11,6 +11,6 @@ if __name__ == "__main__":
     sql_query(data, session)
     print("Data before transformation:")
     print(data.show())
-    transformed_data = transform(data, session)
+    transformed_data = transform(data)
     print("Data after tranformation:")
     print(transformed_data.show())

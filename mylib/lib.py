@@ -15,6 +15,7 @@ def extract_data(url = "https://github.com/fivethirtyeight/data/raw/refs/heads/m
     with requests.get(url) as r:
         with open(file_path, "wb") as f:
             f.write(r.content)
+    return file_path
 
 def read_data(filepath, spark: SparkSession) -> DataFrame:
     df = spark.read.csv(filepath, header=True, inferSchema=True)
@@ -36,12 +37,12 @@ def sql_query(df: DataFrame, spark:SparkSession):
     result.show()
     return result
 
-def transform(df: DataFrame, spark: SparkSession):
+def transform(df: DataFrame):
     conditions = [
         (F.col("Projected SPM") >= 0.5, "Yes"),
         (F.col("Projected SPM") < 0.5, "No")
     ]
 
     return df.withColumn("Projected Starter", F.when(conditions[0][0], conditions[0][1])
-                                                    .when(conditions[1][0], conditions[1][1])
-                                                    .otherwise("NA"))
+    .when(conditions[1][0], conditions[1][1])
+    .otherwise("NA"))
