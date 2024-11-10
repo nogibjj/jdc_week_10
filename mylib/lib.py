@@ -37,4 +37,11 @@ def sql_query(df: DataFrame, spark:SparkSession):
     return result
 
 def transform(df: DataFrame, spark: SparkSession):
-    
+    conditions = [
+        (F.col("Projected SPM") >= 0.5, "Yes"),
+        (F.col("Projected SPM") < 0.5, "No")
+    ]
+
+    return df.withColumn("Projected Starter", F.when(conditions[0][0], conditions[0][1])
+                                                    .when(conditions[1][0], conditions[1][1])
+                                                    .otherwise("NA"))
