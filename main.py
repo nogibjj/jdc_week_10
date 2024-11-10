@@ -1,20 +1,10 @@
 """
 Main cli or app entry point
 """
-
-from mylib.lib import add
-import click
-
-# var=1;var=2
-
-
-@click.command("add")
-@click.argument("a", type=int)
-@click.argument("b", type=int)
-def add_cli(a, b):
-    click.echo(add(a, b))
-
+from mylib.lib import spark_session, extract_data, read_data, sql_query
 
 if __name__ == "__main__":
-    # pylint: disable=no-value-for-parameter
-    add_cli()
+    session = spark_session("PySpark")
+    extract_data()
+    data = read_data("data/nba_2015.csv", session)
+    sql_query(data, session)
