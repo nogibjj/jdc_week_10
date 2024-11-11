@@ -1,37 +1,4 @@
-## PySpark Data Processing :computer: 
-[![CI](https://github.com/nogibjj/jdc_week_10/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/jdc_week_10/actions/workflows/cicd.yml)
-
-The purpose of this project is to use PySpark to perform data processing on a large dataset with at least one Spark SQL query and one data transformation. This was all done using Github codespaces as a virtual environment rather than downloading PySpark locally. The [dataset](https://github.com/fivethirtyeight/data/tree/master/nba-draft-2015) is extracted from a url and loaded as a csv. It contains historical results of the NBA draft projection model, 2001-2015.
-
-## Functionality and commands:
-* lib.py - contains functions to initialize a spark session, extract the data and save it into the local directory, read in the data as a spark dataframe, perform a SQL query, and transform the data using pyspark.sql functions. 
-* main.py - imports function from lib and runs the operations.
-* test_main.py - tests each operation
-* CI/CD pipeline   
-* requirements.txt
-* Makefile
-* Dockerfile and devcontainer
-* Pyspark_output.md - markdown file containing outputs of SQL query and transformation.
-
-## Preparation and usage
-1. Open codespaces 
-2. Load repo to code spaces
-3. Wait for installation of all requirements in requirements.txt
-![alt text](images/install.png)
-
-4. Run main.py to load in database and run queries
-
-## Check format and test errors
-1. Format code `make format`
-![alt text](images/format.png)
-
-2. Lint code `make lint`
-![alt text](images/lint.png)
-
-3. Test code `make test`
-![alt text](images/test.png)
-
-(alternatively, do all with `make all`)
+## PySpark Outputs:
 
 ## Query Explanation:
 ```sql
@@ -80,6 +47,19 @@ only showing top 20 rows
 
 ## Transformation Explanation:
 I add a column (Projected Starter) to the dataframe that indicates whether a player is projected to be a starter in the NBA based on their Projected SPM. If the Projected SPM is >= 0.5, then they are considered a Projected Starter, or else they are not. 
+
+**Transformation:**
+
+```
+conditions = [
+        (F.col("Projected SPM") >= 0.5, "Yes"),
+        (F.col("Projected SPM") < 0.5, "No")
+    ]
+
+    return df.withColumn("Projected Starter", F.when(conditions[0][0], conditions[0][1])
+    .when(conditions[1][0], conditions[1][1])
+    .otherwise("NA"))
+```
 
 ### Data before transformation:
 ```
